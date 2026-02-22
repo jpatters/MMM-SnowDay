@@ -1,8 +1,7 @@
 Module.register("MMM-SnowDay", {
   // default settings for the module
   defaults: {
-    postalCode: "H3C 5L2",        // postal code to check (Go Habs Go!)
-    city: "",                    // optional manual city name
+    apiUrl: "https://www.snowdaypredictor.com/api/query/canoe-cove-pe", // API URL for your location
     updateInterval: 60 * 60 * 1000, // updates every hour
     initialDelay: 15000             // delays on startup to avoid RPi boot congestion
   },
@@ -32,7 +31,7 @@ Module.register("MMM-SnowDay", {
   // triggers the backend helper to fetch new data
   updateSnowDay() {
     this.sendSocketNotification("GET_SNOW_PERCENT", {
-      postalCode: this.config.postalCode.trim() // cleaned in case user entered extra spaces
+      apiUrl: this.config.apiUrl
     });
   },
 
